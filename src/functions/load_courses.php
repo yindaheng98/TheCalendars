@@ -11,8 +11,7 @@ header('Content-type: text/json');
 if (isset($_POST['username'])&&isset($_POST['zfname'])&&isset($_POST['zfpswd'])) {
 
     $redis = new Redis();
-    if ($redis->connect('120.79.175.123', 6379)) {
-        $redis->auth('cc$3377');
+    if ($redis->connect('redis', 6379)) {
         try {
             $state = $redis->hGet($_POST['username'], 'state');
             if ($state == "ld") {
