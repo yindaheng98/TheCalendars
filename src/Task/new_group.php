@@ -10,9 +10,7 @@ else
 {
     $id = $_SESSION['id'];
 }
-?>
 
-<?php
 require('../connection.php');
 if ($_GET['action'] == 'new')
 {

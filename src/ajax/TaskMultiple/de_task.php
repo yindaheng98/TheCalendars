@@ -21,7 +21,7 @@ if (!empty($_POST['tid']) && !empty($_POST['pid']))
     $r = mysqli_query($dbc, $q);
     if (!$r)
     {
-        echo "error:".$q;
+        echo "error:".$q.mysqli_error($dbc);
         exit();
     }
 

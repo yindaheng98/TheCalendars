@@ -1,6 +1,6 @@
 function initGraph(resize)//绘图区域的初始化
 {
-    var source = "../../ajax/getCanvasData.php?proj_id=" + proj_id;
+    var source = "../ajax/getCanvasData.php?proj_id=" + proj_id;
     $.getJSON(source, function (data)
     {
         sys.graft({
@@ -39,7 +39,7 @@ function deal_changelog(changelog)
 
 function updatePage()//更新页面
 {
-    var source = "../../ajax/TaskMultiple/changelog.php?proj_id=" + proj_id;
+    var source = "../ajax/TaskMultiple/changelog.php?proj_id=" + proj_id;
     //var source = "../../ajax/TaskMultiple/get_change_log.php?proj_id=" + proj_id;
     $.getJSON(source, function (changelog)
     {
@@ -52,7 +52,7 @@ function updatePage()//更新页面
 function roll_updatePage()
 {
     var ajaxTimeoutTest = $.ajax({
-                                     url: "../../ajax/TaskMultiple/get_change_log.php",
+                                     url: "../ajax/TaskMultiple/get_change_log.php",
                                      timeout: 40000, //超时时间设置，单位毫秒
                                      type: 'get',
                                      data: {proj_id: proj_id}, //请求所传参数，json格式
@@ -136,7 +136,7 @@ function finish_task_other(task_id, deadline)//接到完成消息
 
 function updateGraph()//绘图区域的更新
 {
-    var source = "../../ajax/getCanvasData.php?proj_id=" + proj_id;
+    var source = "../ajax/getCanvasData.php?proj_id=" + proj_id;
     $.getJSON(source, function (data)
     {
         var count_exists = 0;

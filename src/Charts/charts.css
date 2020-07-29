@@ -1,0 +1,91 @@
+body{
+	margin:0 auto;
+	background-image: url('bgi.jpg');
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+    background-attachment: fixed;
+	text-align: center;
+}
+
+#Point{
+    margin:0 auto;
+    margin-top: 30px;
+	width:95%;
+	height:460px;
+	background-color:rgba(255,255,255,0.5);
+}
+
+#number{
+	width:50%;
+	padding-top: 65px;
+	float: left;
+    font-weight: bold;
+}
+
+#text1,#text2{
+	font-size: 24px;
+}
+
+#num1,#num2{
+    font-size: 36px;
+    color: firebrick;
+}
+
+#distribution{
+    padding-top: 10px;
+    width:50%;
+    height:440px;
+    float: left;
+}
+
+#Mark{
+    margin:0 auto;
+    margin-top: 30px;
+    width:95%;
+    height:460px;
+    background-color:rgba(255,255,255,0.5);
+}
+
+#course{
+    width:44%;
+    padding-top: 50px;
+    float: left;
+    text-align: left;
+    padding-left: 6%;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#course select{
+    width:80%;
+    height: 50px;
+    background-color: rgba(0,0,0,0);
+    border: 1px solid #000000;
+    border-radius: 3px;
+    margin-bottom: 50px;
+}
+
+#subsection{
+    padding-top: 10px;
+    width:50%;
+    height:440px;
+    float: left;
+}
+
+#Past{
+    margin:0 auto;
+    margin-top: 30px;
+    width:95%;
+    height:1300px;
+    background-color:rgba(255,255,255,0.5);
+}
+
+#change{
+    width:100%;
+    height:400px;
+}
+
+#all{
+    width:100%;
+    height:600px;
+}

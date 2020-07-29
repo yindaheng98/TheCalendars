@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 if (!isset($_SESSION['id']))
@@ -16,7 +15,7 @@ $projs = getProjsData($user_id, $con,$redis);//获取工程数据
 require_once "ajax/TaskMultiple/create_json.inc.php";
 create_json_by_username($user_id, $dbc,$redis, 'error_func', $path);
 ?>
-
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8"/>
@@ -140,6 +139,8 @@ create_json_by_username($user_id, $dbc,$redis, 'error_func', $path);
                                     <a href="login.php?action=logout">Logout</a>
                                     <br><br>
                                     <a href="PersonalInfo.html">填写个人信息</a>
+                                    <br><br>
+                                    <a href="Charts/charts.html">成绩查询</a>
                                 </div>
                             </div>
                         </div>

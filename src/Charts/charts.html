@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Charts</title>
+    <link rel="stylesheet" type="text/css" href="charts.css">
+    <script src="echarts.js"></script>
+    <script src="datainit.js"></script>
+</head>
+<body>
+<div id="Point">
+    <div id="number">
+        <p id="text2">专业排名</p>
+        <p id="num2">3</p>
+        <p id="text1">当前学分绩点</p>
+        <p id="num1">3.81</p>
+    </div>
+    <div id="distribution"></div>
+</div>
+<div id="Mark">
+    <div id="course">
+        <p>本学期课程：</p>
+        <select>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="opel">Opel</option>
+            <option value="audi">Audi</option>
+        </select>
+        <p>你的分数:</p>
+        <p>班级平均:</p>
+    </div>
+    <div id="subsection"></div>
+
+</div>
+<div id="Past">
+    <p style="padding-top: 30px;font-size: 24px;font-weight: bold">绩点变化趋势</p>
+    <div id="change"></div>
+    <p style="padding-top: 30px;font-size: 24px;font-weight: bold">全部课程分数（滑动以查看）</p>
+    <div id="all"></div>
+</div>
+<div style="height: 20px"></div>
+<script type="text/javascript">
+    function UsrDat(dchartn, dchartv, schartv, cchartx, ccharty, achartx, acharty)
+    {
+        var Data = new Object();
+        Data.dchartn = dchartn;
+        Data.dchartv = dchartv;
+        Data.schartv = schartv;
+        Data.cchartx = cchartx;
+        Data.ccharty = ccharty;
+        Data.achartx = achartx;
+        Data.acharty = acharty;
+        Data.getDChartN = function ()
+        {
+            return this.dchartn;
+        };
+        Data.getDChartV = function ()
+        {
+            return this.dchartv;
+        };
+        Data.getSChartV = function ()
+        {
+            return this.schartv;
+        };
+        Data.getCChartX = function ()
+        {
+            return this.cchartx;
+        };
+        Data.getCChartY = function ()
+        {
+            return this.ccharty;
+        };
+        Data.getAChartX = function ()
+        {
+            return this.achartx;
+        };
+        Data.getAChartY = function ()
+        {
+            return this.acharty;
+        };
+        return Data;
+    }
+
+    const usr = new UsrDat(
+        data['学期数据']['大一上'][0],
+        data['学期数据']['大一上'][1],
+        data['学期数据']['大一上'][2],
+        data['总计数据'][0],
+        data['总计数据'][1],
+        data['总计数据'][2],
+        data['总计数据'][3]
+    );
+
+    const DistributionChart = echarts.init(document.getElementById("distribution"));
+    const ChangeChart = echarts.init(document.getElementById("change"));
+    const SubsectionChart = echarts.init(document.getElementById("subsection"));
+    const AllChart = echarts.init(document.getElementById("all"));
+    const option_D = {
+        tooltip: {},
+        radar: {
+            shape: 'circle',
+            name: {
+                textStyle: {
+                    fontSize: 18,
+                    color: '#000000',
+                    backgroundColor: 'rgba(255,255,255,0.8)',
+                    borderRadius: 3,
+                    padding: [3, 5]
+                }
+            },
+            indicator: usr.getDChartN(),
+        },
+        series: [{
+            name: "当前学分绩点",
+            type: 'radar',
+            itemStyle: {
+                normal: {
+                    color: "#177cb0",
+                    areaStyle: {
+                        type: 'default',
+                        color: "#177cb0",
+                        opacity: 0.3,
+                    }
+                }
+            },
+            data: [{
+                value: usr.getDChartV()
+            }]
+        }]
+    };
+    const option_S = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{b} : {c} ({d}%)",
+            fontSize: 36,
+        },
+        series: [
+            {
+                name: '次数',
+                type: 'pie',
+                radius: '70%',
+                center: ["50%", "50%"],
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 18,
+                                color: '#000000',
+                                backgroundColor: 'rgba(255,255,255,0.8)',
+                                borderRadius: 3,
+                                padding: [3, 5]
+                            }
+                        },
+                        labelLine: {
+                            show: true,
+                            length: 0.001,
+                        }
+                    }
+                },
+                data: [
+                    {
+                        value: usr.getSChartV()[0],
+                        name: '90以上',
+                        itemStyle: {color: "rgba(131,175,155,0.8)"}
+                    },
+                    {
+                        value: usr.getSChartV()[1],
+                        name: '80~89',
+                        itemStyle: {color: "rgba(200,200,169,0.8)"}
+                    },
+                    {
+                        value: usr.getSChartV()[2],
+                        name: '70~79',
+                        itemStyle: {color: "rgba(249,205,173,0.8)"}
+                    },
+                    {
+                        value: usr.getSChartV()[3],
+                        name: '60~69',
+                        itemStyle: {color: "rgba(252,157,154,0.8)"}
+                    },
+                    {
+                        value: usr.getSChartV()[4],
+                        name: '60以下',
+                        itemStyle: {color: "rgba(254,67,101,0.8)"}
+                    },
+                ],
+            }
+        ]
+    };
+    const option_C = {
+        xAxis: {
+            type: 'category',
+            axisLabel: {
+                textStyle: {
+                    fontSize: 24,
+                    fontWeight: "bold"
+                }
+            },
+            data: usr.getCChartX()
+
+        },
+        yAxis: {
+            type: 'value',
+            scale: true,
+            precision: 2,
+            splitNumber: 4,
+            axisLabel: {
+                textStyle: {
+                    fontSize: 24,
+                    fontWeight: "bold"
+                }
+            },
+            boundaryGap: [0.01, 0.01],
+        },
+        series: [{
+            data: usr.getCChartY(),
+            type: 'line',
+            smooth: true,
+            color: "firebrick",
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    fontSize: 18,
+                    color: '#000000',
+                    backgroundColor: 'rgba(255,255,255,0.8)',
+                    borderRadius: 3,
+                    padding: [3, 5]
+                }
+            }
+        }]
+    };
+    const option_A = {
+
+        grid: {
+            y2: 200
+        },
+        tooltip: {},
+        dataZoom: [
+            {
+                type: 'inside',
+                show: true,
+                xAxisIndex: [0],
+                start: 0,//默认为1
+                end: 50
+            },
+        ],
+        calculable: true,
+        xAxis: {
+            type: 'category',
+            axisLabel: {
+                interval: 0,
+                rotate: 0,
+                formatter: function (value)
+                {
+                    return value.split("").join("\n");
+                },
+                textStyle: {
+                    fontSize: 24,
+                    fontWeight: "bold"
+                }
+            },
+            data: usr.getAChartX(),
+        },
+        yAxis: [
+            {
+                axisLabel: {
+                    textStyle: {
+                        fontSize: 24,
+                        fontWeight: "bold"
+                    }
+                },
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                type: 'bar',
+                barGap: 70,
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        fontSize: 18,
+                        color: '#000000',
+                        backgroundColor: 'rgba(255,255,255,0.8)',
+                        borderRadius: 3,
+                        padding: [3, 5]
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: function ()
+                        {
+                            return "#" + Math.floor(Math.random() * (256 * 256 * 256 - 1)).toString(16);
+                        }
+                    }
+                },
+                data: usr.getAChartY()
+            }
+        ]
+    };
+    DistributionChart.setOption(option_D);
+    SubsectionChart.setOption(option_S);
+    ChangeChart.setOption(option_C);
+    AllChart.setOption(option_A);
+</script>
+</body>
+</html>
