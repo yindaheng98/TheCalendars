@@ -1,0 +1,18 @@
+use sql_test;
+drop trigger 创建用户个人日程表;
+drop trigger 更新用户个人日程表工程名;
+drop trigger 创建工程默认任务;
+drop trigger 级联删除用户个人日程表;
+drop trigger 检查用户_任务表插入项;
+drop trigger 检查用户_任务表更新项;
+drop trigger 检查流程表插入项;
+drop trigger 检查流程表更新项;
+drop table 用户_任务;
+drop table 流程;
+drop table 任务;
+drop table 工程;
+drop table 用户_课程;
+drop table 作业;
+drop table 教学班_课程;
+drop table 课程;
+drop table 用户;

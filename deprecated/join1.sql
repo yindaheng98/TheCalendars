@@ -1,0 +1,1 @@
+SELECT DISTINCT 用户名,姓名 FROM 用户 RIGHT JOIN(SELECT DISTINCT 执行者 FROM 用户_任务 RIGHT JOIN(SELECT 所属工程代码 FROM 用户_任务 WHERE 执行者='yin')AS tt USING(所属工程代码)) AS t ON t.执行者=用户.用户名;
